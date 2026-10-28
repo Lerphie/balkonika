@@ -1,0 +1,12 @@
+# Уведомления о стороннем ПО
+
+Эти сведения относятся к библиотекам, присутствующим в сборке, независимо от того, используются ли все их функции приложением. Тексты лицензий включены рядом с этим файлом в `assets/licenses/`.
+
+- **AIGameEngine 0.7.0** — MIT, Copyright (c) 2026 Tearevo. Текст: `aigameengine-MIT.txt` (копия `LICENSE` исходной игровой копии).
+- **Babylon.js 9.26.0** — Apache-2.0, Copyright 2023 The Babylon.js team. Тексты из точного npm-пакета: `babylonjs-9.26.0-LICENSE.txt` и `babylonjs-9.26.0-NOTICE.txt`. Официальный пакет: https://registry.npmjs.org/babylonjs/9.26.0 ; архив: https://registry.npmjs.org/babylonjs/-/babylonjs-9.26.0.tgz . Файл `libs/babylon.js` побайтно совпадает с `package/babylon.js` этого архива (SHA-256 `f4d7e6800fa23a969f970dcdfacdf015d18a220fa9e589800a24f2dd531fe677`).
+- **babylonjs-loaders 9.26.0** — Apache-2.0. Текст из точного npm-пакета: `babylonjs-loaders-9.26.0-LICENSE.txt`. Официальный пакет: https://registry.npmjs.org/babylonjs-loaders/9.26.0 ; архив: https://registry.npmjs.org/babylonjs-loaders/-/babylonjs-loaders-9.26.0.tgz . В архиве отдельного NOTICE нет. `libs/babylonjs.loaders.min.js` побайтно совпадает с `package/babylonjs.loaders.min.js` (SHA-256 `0d1b9b76e7f866325181ef17531f0d2d1dcfe178f201fabb6af0ddacf4853532`).
+- **@babylonjs/havok 1.3.14** — MIT, Copyright (c) 2023 Babylon.js. Текст: `havok-MIT.txt` и `libs/havok/LICENSE`; сведения о точных файлах, контрольных суммах и источнике: `libs/havok/provenance.json`, https://registry.npmjs.org/@babylonjs/havok/1.3.14 . Физика в приложении отключена, но библиотеки включены в комплект движка.
+- **simplex-noise.js** — MIT, Copyright (c) 2018 Jonas Wagner. `simplex-noise-MIT.txt` воспроизводит имеющееся в начале `libs/simplex-noise.js` уведомление и атрибуцию. Версия в исходной копии отдельно не установлена; не предполагается точная версия npm-пакета.
+- **RVO2** — Apache-2.0; `js/Navigation2D.js` содержит адаптацию и указывает Copyright 2008 University of North Carolina at Chapel Hill. Текст лицензии: `rvo2-apache.txt`. Навигация не используется интерфейсом, но код присутствует в сборке.
+
+Текстуры `assets/balkonika/*.png` созданы для проекта локальным генератором `tools/make-balkonika-textures.py`, сторонние изображения для них не использованы. Демо-ассеты, сохранённые в исходной копии движка, имеют собственные сведения в `docs/ASSET_PROVENANCE.md`; отсутствие подтверждённой лицензии для них не заменяется лицензией исходного кода.

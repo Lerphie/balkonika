@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "package": "@babylonjs/havok",
+  "version": "1.3.14",
+  "license": "MIT",
+  "repository": "https://github.com/BabylonJS/havok",
+  "sourceCommit": "21a30bdbc338ef7c808862152431ccb00b88ef8c",
+  "metadataUrl": "https://registry.npmjs.org/@babylonjs/havok/1.3.14",
+  "tarball": "https://registry.npmjs.org/@babylonjs/havok/-/havok-1.3.14.tgz",
+  "tarballIntegrity": "sha512-+j2FDwLtkh5Gb//KizE8Ks3GIB/3vH8Yx9cQsMvZQpsKkH5gn089wIlJ9Yt8dJxbwBmWKGpMTIXxZE7YdOHUnQ==",
+  "tarballSha256": "42affaf308352b65abf05efe1b44669ba4498306f7f3b4ee7d83ac3de70e9a54",
+  "integrityVerified": true,
+  "files": [
+    {
+      "path": "HavokPhysics_umd.js",
+      "packageEntry": "package/lib/umd/HavokPhysics_umd.js",
+      "bytes": 67584,
+      "sha256": "8ffcf3b71f434e489275699abda074baa841c50c4fbcdf18a7fa94cdb998e590",
+      "modified": false
+    },
+    {
+      "path": "HavokPhysics.wasm",
+      "packageEntry": "package/lib/umd/HavokPhysics.wasm",
+      "bytes": 2094563,
+      "sha256": "026917766f534c156286f07975850978dabf17c42e742bbfaaebbcb2215e4e11",
+      "modified": false
+    },
+    {
+      "path": "LICENSE",
+      "packageEntry": "package/LICENSE",
+      "bytes": 1069,
+      "sha256": "d8b00cac49e55c3e93840e02868989c73520e50a865dfbd25b9d20d35397ccf0",
+      "modified": false
+    }
+  ],
+  "delivery": "Original npm UMD loader and matching WASM, vendored without modification. Load locally; no CDN or npm install is required by the shipped game. Preserve LICENSE when redistributing."
+}
