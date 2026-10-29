@@ -2,7 +2,7 @@
 // the other modules read these globals. Edited by the editor (_utils/editor): the server
 // patches scalar literals and numeric PROJECT_CONFIG fields. Keep values as literals
 // (colors — 0xRRGGBB); the editor won't touch a formula.
-const GAME_VERSION = "0.1.0"; // build version: ?v= on scripts (tools/build.mjs) and the archive name
+const GAME_VERSION = "0.2.0"; // build version: ?v= on scripts (tools/build.mjs) and the archive name
 
 // Project-specific numeric settings and their editor metadata; no engine registry edits.
 /** @type {Record<string, ArcProjectSetting>} */

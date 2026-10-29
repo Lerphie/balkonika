@@ -56,37 +56,37 @@ const ArcBindings = {
         "assets": [
             {
                 "id": "reference-photo",
-                "path": "assets/balkonika/photo-v3/reference-photo.jpg",
+                "path": "assets/balkonika/photo-v4/reference-photo.jpg",
                 "required": true
             },
             {
                 "id": "walls-beige",
-                "path": "assets/balkonika/photo-v3/walls-beige.png",
+                "path": "assets/balkonika/photo-v4/walls-beige.png",
                 "required": true
             },
             {
                 "id": "walls-lightgray",
-                "path": "assets/balkonika/photo-v3/walls-lightgray.png",
+                "path": "assets/balkonika/photo-v4/walls-lightgray.png",
                 "required": true
             },
             {
                 "id": "floor-dark-wood",
-                "path": "assets/balkonika/photo-v3/floor-dark-wood.png",
+                "path": "assets/balkonika/photo-v4/floor-dark-wood.png",
                 "required": true
             },
             {
                 "id": "floor-gray-tile",
-                "path": "assets/balkonika/photo-v3/floor-gray-tile.png",
+                "path": "assets/balkonika/photo-v4/floor-gray-tile.png",
                 "required": true
             },
             {
                 "id": "ceiling",
-                "path": "assets/balkonika/photo-v3/ceiling.png",
+                "path": "assets/balkonika/photo-v4/ceiling.png",
                 "required": true
             },
             {
                 "id": "windows",
-                "path": "assets/balkonika/photo-v3/windows.png",
+                "path": "assets/balkonika/photo-v4/windows.png",
                 "required": true
             }
         ]
