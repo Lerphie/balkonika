@@ -78,7 +78,8 @@ class Game {
     }
     restore(state) { this.validateSnapshot(state); this.state = { ...state }; this.renderSelection(); }
     validate() { return ArcBindings.validateRuntime(this.app.location, UI, ArcBindings.balkonikaContract); }
-    update() {}
+    /** @param {number} dt */
+    update(dt) { this.scene.update(dt); }
     dispose() {
         this.disposed = true;
         if (this.resizeObserver) this.resizeObserver.disconnect();

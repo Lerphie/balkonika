@@ -88,6 +88,21 @@ const ArcBindings = {
                 "id": "windows",
                 "path": "assets/balkonika/photo-v4/windows.png",
                 "required": true
+            },
+            {
+                "id": "cloud",
+                "path": "assets/balkonika/motion-v1/cloud.png",
+                "required": true
+            },
+            {
+                "id": "car",
+                "path": "assets/balkonika/motion-v1/car.png",
+                "required": true
+            },
+            {
+                "id": "bird",
+                "path": "assets/balkonika/motion-v1/bird.png",
+                "required": true
             }
         ]
     },
