@@ -120,17 +120,23 @@ class BalconyScene {
         this.register(this.outsideBackdrop);
         this.outsideHorizon = this.box('distant-horizon', [-135, 105, -20], [2, 28, 674], landscape);
         this.outsideHorizon.setEnabled(false);
-        this.box('window-glass', [-123, 171, -20], [1, 148, 674], glass);
-        this.box('window-sill', [-110, 95, -20], [31, 7, 680], white);
-        this.box('sill-shadow', [-118, 90, -20], [12, 3, 680], frameSide);
-        this.box('frame-top', [-121, 245, -20], [10, 8, 680], white);
-        this.box('frame-bottom', [-121, 105, -20], [10, 7, 680], white);
-        for (const z of [-356, -222, -88, 46, 180, 314]) {
+        // The window profiles meet the near face of the plaster return at z=314.
+        // Their shared endpoint avoids both intersections and visible gaps.
+        const windowNearZ = -360;
+        const windowEndZ = 314;
+        const windowCenterZ = (windowNearZ + windowEndZ) / 2;
+        const windowDepth = windowEndZ - windowNearZ;
+        this.box('window-glass', [-123, 171, windowCenterZ], [1, 148, windowDepth], glass);
+        this.box('window-sill', [-110, 95, windowCenterZ], [31, 7, windowDepth], white);
+        this.box('sill-shadow', [-118, 90, windowCenterZ], [12, 3, windowDepth], frameSide);
+        this.box('frame-top', [-121, 245, windowCenterZ], [10, 8, windowDepth], white);
+        this.box('frame-bottom', [-121, 105, windowCenterZ], [10, 7, windowDepth], white);
+        for (const z of [-356, -222, -88, 46, 180, windowEndZ - 2.25]) {
             this.box('window-mullion-' + z, [-120, 175, z], [8, 144, 4.5], white);
             this.box('mullion-edge-' + z, [-114, 175, z - 3], [1, 144, 1.2], frameSide);
         }
         this.box('window-end-return', [-110, 174, 317], [20, 152, 6], this.wallMaterial);
-        this.box('window-midrail', [-121, 164, -20], [8, 5, 674], white);
+        this.box('window-midrail', [-121, 164, windowCenterZ], [8, 5, windowDepth], white);
         this.setWall('white');
     }
 
