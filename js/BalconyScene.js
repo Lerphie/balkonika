@@ -11,65 +11,126 @@ class BalconyScene {
         for (const mesh of app.location.terrain.meshes) mesh.setEnabled(false);
         this.scene.fogMode = BABYLON.Scene.FOGMODE_NONE;
         this.scene.clearColor = new BABYLON.Color4(0.83, 0.89, 0.90, 1);
-        this.view.hemi.intensity = 0.84;
+        this.view.hemi.intensity = 0.76;
         this.view.hemi.diffuse = new BABYLON.Color3(1, 0.98, 0.95);
         this.view.hemi.groundColor = new BABYLON.Color3(0.90, 0.89, 0.85);
-        this.view.sun.intensity = 0.35;
+        this.view.sun.intensity = 0.34;
+        if (!IS_MOBILE && this.view.shadow.usePercentageCloserFiltering) {
+            this.view.shadow.filteringQuality = BABYLON.ShadowGenerator.QUALITY_HIGH;
+        }
+        this.view.sun.direction = new BABYLON.Vector3(1, -0.50, 0.08).normalize();
+        this.scene.metadata.arcSun = {
+            dir: this.view.sun.direction.negate().normalize(),
+            color: this.view.sun.diffuse.scale(this.view.sun.intensity)
+        };
+        this.scene.metadata.arcShadow = {
+            color: new BABYLON.Color3(0.72, 0.69, 0.64), strength: 0.34
+        };
+        // CameraController fits its own view; keep this static interior's sunlight
+        // centred on the room immediately before each render instead.
+        this.stopLightingSync = this.view.onBeforeFrame(() => this.view.updateLightFrustum(0, -20, 110, 430));
 
-        this.camera = new BABYLON.TargetCamera('balcony-fixed-camera', new BABYLON.Vector3(-4, 155, -242), this.scene);
+        this.camera = new BABYLON.TargetCamera('balcony-fixed-camera', new BABYLON.Vector3(0, 155, -307), this.scene);
         this.camera.minZ = 1;
         this.camera.maxZ = 2000;
-        this.camera.fov = 72 * Math.PI / 180;
-        this.camera.setTarget(new BABYLON.Vector3(2, 105, 130));
+        this.camera.fov = 68 * Math.PI / 180;
+        this.camera.setTarget(new BABYLON.Vector3(0, 20, 210));
         this.scene.activeCamera = this.camera;
 
         this.wallMaterial = this.material('walls', '#ecebe7');
-        this.wallMaterial.emissiveColor = new BABYLON.Color3(0.18, 0.18, 0.18);
-        const white = this.material('window-frame', '#f2f1ea');
-        const frameSide = this.material('window-frame-shadow', '#c5c9c6');
+        this.wallMaterial.emissiveColor = new BABYLON.Color3(0.11, 0.11, 0.11);
+        const plaster = new BABYLON.Texture('assets/balkonika/wall-plaster-photo-v2.webp', this.scene, false, false);
+        plaster.anisotropicFilteringLevel = 8;
+        plaster.uScale = 3;
+        plaster.vScale = 3;
+        this.wallMaterial.diffuseTexture = plaster;
+        this.textures.push(plaster);
+        const white = this.material('window-frame', '#f2f1eb');
+        const frameSide = this.material('window-frame-shadow', '#b5b9b6');
         const ceiling = this.material('ceiling', '#f6f5ef');
-        ceiling.emissiveColor = new BABYLON.Color3(0.20, 0.20, 0.19);
-        const sky = this.material('outside-sky', '#b8d5dc', true);
-        const landscape = this.material('outside-landscape', '#c7d8d0', true);
+        ceiling.emissiveColor = new BABYLON.Color3(0.24, 0.24, 0.23);
+        const sky = this.material('outside-sky', '#c2dde5', true);
+        const city = new BABYLON.Texture('assets/balkonika/city-daylight-v2.webp', this.scene, false, true);
+        city.anisotropicFilteringLevel = 8;
+        sky.emissiveColor = BABYLON.Color3.Black();
+        sky.emissiveTexture = city;
+        this.textures.push(city);
+        const landscape = this.material('outside-landscape', '#c9d9d1', true);
         const glass = this.material('glass', '#e1eff0');
-        glass.alpha = 0.18;
+        glass.alpha = 0.12;
         glass.specularColor = new BABYLON.Color3(0.25, 0.25, 0.25);
+        const apartmentGlass = this.material('apartment-window-glass', '#737c78', true);
+        const apartmentImage = new BABYLON.Texture('assets/balkonika/interior-reflection-v2.webp', this.scene, false, true);
+        apartmentImage.anisotropicFilteringLevel = 8;
+        apartmentGlass.emissiveColor = BABYLON.Color3.Black();
+        apartmentGlass.emissiveTexture = apartmentImage;
+        apartmentGlass.backFaceCulling = false;
+        this.textures.push(apartmentImage);
+        const contactShadow = this.material('contact-shadow', '#4c4b46', true);
+        contactShadow.alpha = 0.10;
 
         this.floorMaterials = {
-            lightWood: this.floorMaterial('light-wood', 'assets/balkonika/light-wood.png'),
-            darkWood: this.floorMaterial('dark-wood', 'assets/balkonika/dark-wood.png'),
-            grayTile: this.floorMaterial('gray-tile', 'assets/balkonika/gray-tile.png')
+            lightWood: this.floorMaterial('light-wood', 'assets/balkonika/light-wood-photo-v2.webp'),
+            darkWood: this.floorMaterial('dark-wood', 'assets/balkonika/dark-wood-photo-v2.webp'),
+            grayTile: this.floorMaterial('gray-tile', 'assets/balkonika/gray-tile-photo-v2.webp')
         };
-        this.floor = BABYLON.MeshBuilder.CreateGround('balcony-floor', { width: 280, height: 560 }, this.scene);
+        this.floor = BABYLON.MeshBuilder.CreateGround('balcony-floor', { width: 240, height: 680 }, this.scene);
         this.floor.position.set(0, 0, -20);
         this.floor.material = this.floorMaterials.lightWood;
         this.register(this.floor);
 
-        // Solid surfaces are boxes so the viewer always sees their correctly wound faces.
-        this.box('left-wall', [-143, 125, -20], [6, 250, 560], this.wallMaterial);
-        this.box('end-wall', [0, 125, 263], [280, 250, 6], this.wallMaterial);
-        this.box('right-low-wall', [143, 49, -20], [6, 98, 560], this.wallMaterial);
-        this.box('ceiling', [0, 253, -20], [280, 6, 560], ceiling);
+        // The near room wall is split around the inset apartment window.
+        this.box('left-wall-under-window', [123, 51, -20], [6, 102, 680], this.wallMaterial);
+        this.box('left-wall-over-window', [123, 247, -20], [6, 6, 680], this.wallMaterial);
+        this.box('left-wall-near-return', [123, 174, -348], [6, 144, 24], this.wallMaterial);
+        this.box('left-wall-far-return', [123, 174, 110], [6, 144, 420], this.wallMaterial);
+        this.box('end-wall', [0, 125, 323], [240, 250, 6], this.wallMaterial);
+        this.box('right-low-wall', [-123, 46, -20], [6, 92, 680], this.wallMaterial);
+        this.box('ceiling', [0, 253, -20], [240, 6, 680], ceiling);
 
-        // The plaster return belongs to the wall and meets the end wall at z=260.
-        // Window components stop at its near face (z=254), instead of crossing the corner.
-        this.box('window-end-return', [127.5, 174, 257], [25, 152, 6], this.wallMaterial);
+        // Thin skirting and softly blended contact shadows clarify floor-wall joins.
+        this.box('left-baseboard', [119, 3.5, -20], [2, 7, 680], white);
+        this.box('right-baseboard', [-119, 3.5, -20], [2, 7, 680], white);
+        this.box('end-baseboard', [0, 3.5, 319], [238, 7, 2], white);
+        this.box('left-floor-contact-shadow', [117, 0.15, -20], [4, 0.15, 680], contactShadow);
+        this.box('right-floor-contact-shadow', [-117, 0.15, -20], [4, 0.15, 680], contactShadow);
+        this.box('end-floor-contact-shadow', [0, 0.15, 317], [234, 0.15, 4], contactShadow);
 
-        // Opaque outdoor planes and transparent glass are owned separately from finishes.
-        this.box('daylight', [158, 171, -23], [2, 150, 554], sky);
-        this.box('distant-horizon', [156, 110, -23], [2, 26, 554], landscape);
-        this.box('window-glass', [143, 171, -21], [1, 140, 550], glass);
-        this.box('window-sill', [131, 99, -23], [32, 7, 554], white);
-        this.box('sill-shadow', [139, 94, -23], [13, 3, 554], frameSide);
-        this.box('frame-top', [141, 244, -23], [12, 10, 554], white);
-        this.box('frame-bottom', [141, 108, -23], [12, 7, 554], white);
-        for (let z = -296; z <= 260; z += 93) {
-            this.box('window-mullion-' + z, [140, 176, z], [12, 137, 7], white);
-            this.box('mullion-edge-' + z, [133, 176, z + 3], [2, 137, 2], frameSide);
+        // Inset apartment window: recess, sill, frames, and dark interior glazing.
+        const apartmentBackdrop = BABYLON.MeshBuilder.CreatePlane('apartment-window-recess', { width: 235, height: 142 }, this.scene);
+        apartmentBackdrop.position.set(124, 173, -217.5);
+        apartmentBackdrop.rotation.y = Math.PI / 2;
+        apartmentBackdrop.material = apartmentGlass;
+        this.register(apartmentBackdrop);
+        this.box('apartment-window-glass', [122, 173, -217.5], [0.4, 142, 235], glass);
+        this.box('apartment-window-sill', [111, 103, -217.5], [28, 6, 240], white);
+        this.box('apartment-window-top', [118, 243, -217.5], [10, 7, 240], white);
+        this.box('apartment-window-bottom', [118, 109, -217.5], [10, 8, 240], white);
+        for (const z of [-334, -164, -101]) {
+            this.box('apartment-window-mullion-' + z, [118, 176, z], [10, 134, 6], white);
+            this.box('apartment-window-mullion-shadow-' + z, [112, 176, z - 3], [2, 134, 2], frameSide);
         }
-        this.box('window-end-mullion', [140, 176, 250.5], [12, 137, 7], white);
-        this.box('window-end-mullion-edge', [133, 176, 253], [2, 137, 2], frameSide);
-        this.box('window-midrail', [140, 166, -20.5], [10, 5, 549], white);
+
+        // The outside backdrop is a separately owned vertical plane behind the glass.
+        this.outsideBackdrop = BABYLON.MeshBuilder.CreatePlane('daylight', { width: 674, height: 380 }, this.scene);
+        this.outsideBackdrop.position.set(-137, 170, -20);
+        this.outsideBackdrop.rotation.y = Math.PI / 2;
+        sky.backFaceCulling = false;
+        this.outsideBackdrop.material = sky;
+        this.register(this.outsideBackdrop);
+        this.outsideHorizon = this.box('distant-horizon', [-135, 105, -20], [2, 28, 674], landscape);
+        this.outsideHorizon.setEnabled(false);
+        this.box('window-glass', [-123, 171, -20], [1, 148, 674], glass);
+        this.box('window-sill', [-110, 95, -20], [31, 7, 680], white);
+        this.box('sill-shadow', [-118, 90, -20], [12, 3, 680], frameSide);
+        this.box('frame-top', [-121, 245, -20], [10, 8, 680], white);
+        this.box('frame-bottom', [-121, 105, -20], [10, 7, 680], white);
+        for (const z of [-356, -222, -88, 46, 180, 314]) {
+            this.box('window-mullion-' + z, [-120, 175, z], [8, 144, 4.5], white);
+            this.box('mullion-edge-' + z, [-114, 175, z - 3], [1, 144, 1.2], frameSide);
+        }
+        this.box('window-end-return', [-110, 174, 317], [20, 152, 6], this.wallMaterial);
+        this.box('window-midrail', [-121, 164, -20], [8, 5, 674], white);
         this.setWall('white');
     }
 
@@ -90,8 +151,11 @@ class BalconyScene {
     /** @param {string} name @param {string} path */
     floorMaterial(name, path) {
         const material = this.material(name, '#ffffff');
+        material.emissiveColor = new BABYLON.Color3(0.07, 0.07, 0.07);
         const texture = new BABYLON.Texture(path, this.scene, false, false);
         texture.anisotropicFilteringLevel = 8;
+        // Preserve the image aspect ratio on the long floor, keeping tiles square.
+        texture.uScale = (240 / 680) / (940 / 1672);
         material.diffuseTexture = texture;
         this.textures.push(texture);
         return material;
@@ -99,7 +163,9 @@ class BalconyScene {
 
     /** @param {BABYLON.AbstractMesh} mesh */
     register(mesh) {
-        World3D.addObject(this.view, mesh, 'prop', { castShadow: false, receiveShadows: false, ink: false, outline: false });
+        const castsSun = /^(window-mullion-|window-midrail|frame-top|frame-bottom)/.test(mesh.name);
+        const receivesSun = /^(balcony-floor|left-wall-|end-wall|right-low-wall)/.test(mesh.name);
+        World3D.addObject(this.view, mesh, 'prop', { castShadow: castsSun, receiveShadows: receivesSun, ink: false, outline: false });
         mesh.isPickable = false;
         this.meshes.push(mesh);
     }
@@ -125,6 +191,7 @@ class BalconyScene {
     }
 
     dispose() {
+        this.stopLightingSync();
         for (const mesh of this.meshes) World3D.removeObject(this.view, mesh);
         for (const material of this.materials) material.dispose(false, false);
         for (const texture of this.textures) texture.dispose();

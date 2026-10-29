@@ -56,17 +56,32 @@ const ArcBindings = {
         "assets": [
             {
                 "id": "light-wood",
-                "path": "assets/balkonika/light-wood.png",
+                "path": "assets/balkonika/light-wood-photo-v2.webp",
                 "required": true
             },
             {
                 "id": "dark-wood",
-                "path": "assets/balkonika/dark-wood.png",
+                "path": "assets/balkonika/dark-wood-photo-v2.webp",
                 "required": true
             },
             {
                 "id": "gray-tile",
-                "path": "assets/balkonika/gray-tile.png",
+                "path": "assets/balkonika/gray-tile-photo-v2.webp",
+                "required": true
+            },
+            {
+                "id": "city-daylight",
+                "path": "assets/balkonika/city-daylight-v2.webp",
+                "required": true
+            },
+            {
+                "id": "wall-plaster",
+                "path": "assets/balkonika/wall-plaster-photo-v2.webp",
+                "required": true
+            },
+            {
+                "id": "interior-reflection",
+                "path": "assets/balkonika/interior-reflection-v2.webp",
                 "required": true
             }
         ]
