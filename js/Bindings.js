@@ -42,6 +42,16 @@ const ArcBindings = {
                 "required": true
             },
             {
+                "id": "floor_herringbone",
+                "kind": "button",
+                "required": true
+            },
+            {
+                "id": "floor_warmTile",
+                "kind": "button",
+                "required": true
+            },
+            {
                 "id": "selection",
                 "kind": "text",
                 "required": true
@@ -61,12 +71,12 @@ const ArcBindings = {
             },
             {
                 "id": "walls-beige",
-                "path": "assets/balkonika/photo-v4/walls-beige.png",
+                "path": "assets/balkonika/walls-v2/beige.png",
                 "required": true
             },
             {
                 "id": "walls-lightgray",
-                "path": "assets/balkonika/photo-v4/walls-lightgray.png",
+                "path": "assets/balkonika/walls-v2/light-gray.png",
                 "required": true
             },
             {
@@ -76,7 +86,17 @@ const ArcBindings = {
             },
             {
                 "id": "floor-gray-tile",
-                "path": "assets/balkonika/photo-v4/floor-gray-tile.png",
+                "path": "assets/balkonika/floors-v2/floor-gray-tile.png",
+                "required": true
+            },
+            {
+                "id": "floor-herringbone",
+                "path": "assets/balkonika/floors-v2/floor-herringbone.png",
+                "required": true
+            },
+            {
+                "id": "floor-warm-tile",
+                "path": "assets/balkonika/floors-v2/floor-warm-tile.png",
                 "required": true
             },
             {
@@ -97,6 +117,11 @@ const ArcBindings = {
             {
                 "id": "car",
                 "path": "assets/balkonika/motion-v1/car.png",
+                "required": true
+            },
+            {
+                "id": "car-light",
+                "path": "assets/balkonika/motion-v1/car-light.png",
                 "required": true
             },
             {

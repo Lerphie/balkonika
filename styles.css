@@ -35,6 +35,8 @@ body { background: #f4f6f3; }
 .arc-ui [data-ui='floor_lightWood']::before { background: repeating-linear-gradient(5deg, #d5b689 0 4px, #c5a477 5px 6px, #e1c8a1 7px 11px) !important; }
 .arc-ui [data-ui='floor_darkWood']::before { background: repeating-linear-gradient(5deg, #795a46 0 4px, #604735 5px 6px, #987760 7px 11px) !important; }
 .arc-ui [data-ui='floor_grayTile']::before { background: repeating-linear-gradient(0deg, transparent 0 13px, #e6e8e6 13px 15px), repeating-linear-gradient(90deg, #9da5a3 0 13px, #e6e8e6 13px 15px) !important; }
+.arc-ui [data-ui='floor_herringbone']::before { background: repeating-linear-gradient(135deg, #dec6a3 0 5px, #b4936c 5px 7px, #d4b48b 7px 12px) !important; }
+.arc-ui [data-ui='floor_warmTile']::before { background: repeating-linear-gradient(0deg, transparent 0 13px, #f3eee4 13px 15px), repeating-linear-gradient(90deg, #c9bfac 0 13px, #f3eee4 13px 15px) !important; }
 .arc-ui [data-ui='selection_label'] { margin-top: 24px; padding-top: 19px; border-top: 1px solid #e7ece8; }
 .arc-ui [data-ui='selection'] { margin-top: 8px; }
 .arc-ui [data-ui='selection'] > div { font-size: 14px !important; line-height: 1.4 !important; font-weight: 500 !important; }

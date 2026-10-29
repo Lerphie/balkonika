@@ -1,7 +1,7 @@
 // Application state is independent of the scene and the interface.
 const BalkonikaSelection = {
     walls: { white: 'белые', beige: 'бежевые', lightGray: 'светло-серые' },
-    floors: { lightWood: 'светлое дерево', darkWood: 'тёмное дерево', grayTile: 'серая плитка' },
+    floors: { lightWood: 'светлое дерево', darkWood: 'тёмное дерево', grayTile: 'серая плитка', herringbone: 'дерево ёлочкой', warmTile: 'светлая плитка' },
     initial() { return { wallColor: 'white', floorMaterial: 'lightWood' }; },
     change(state, name, value) {
         if (name === 'reset') return this.initial();
