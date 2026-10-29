@@ -99,3 +99,9 @@ body { background: #f4f6f3; }
 @media (max-width: 1000px) and (max-height: 500px) {
   #world3d { max-width: 480px; justify-self: center; }
 }
+
+/* Match the supplied photograph's aspect ratio without cropping or distorting it. */
+#world3d { height: auto; min-height: 0; aspect-ratio: 1280 / 839; align-self: start; }
+@media (max-width: 760px), (max-width: 1000px) and (max-height: 500px) {
+  #world3d { height: auto; min-height: 0; aspect-ratio: 1280 / 839; }
+}

@@ -55,33 +55,38 @@ const ArcBindings = {
         "objects": [],
         "assets": [
             {
-                "id": "light-wood",
-                "path": "assets/balkonika/light-wood-photo-v2.webp",
+                "id": "reference-photo",
+                "path": "assets/balkonika/photo-v3/reference-photo.jpg",
                 "required": true
             },
             {
-                "id": "dark-wood",
-                "path": "assets/balkonika/dark-wood-photo-v2.webp",
+                "id": "walls-beige",
+                "path": "assets/balkonika/photo-v3/walls-beige.png",
                 "required": true
             },
             {
-                "id": "gray-tile",
-                "path": "assets/balkonika/gray-tile-photo-v2.webp",
+                "id": "walls-lightgray",
+                "path": "assets/balkonika/photo-v3/walls-lightgray.png",
                 "required": true
             },
             {
-                "id": "city-daylight",
-                "path": "assets/balkonika/city-daylight-v2.webp",
+                "id": "floor-dark-wood",
+                "path": "assets/balkonika/photo-v3/floor-dark-wood.png",
                 "required": true
             },
             {
-                "id": "wall-plaster",
-                "path": "assets/balkonika/wall-plaster-photo-v2.webp",
+                "id": "floor-gray-tile",
+                "path": "assets/balkonika/photo-v3/floor-gray-tile.png",
                 "required": true
             },
             {
-                "id": "interior-reflection",
-                "path": "assets/balkonika/interior-reflection-v2.webp",
+                "id": "ceiling",
+                "path": "assets/balkonika/photo-v3/ceiling.png",
+                "required": true
+            },
+            {
+                "id": "windows",
+                "path": "assets/balkonika/photo-v3/windows.png",
                 "required": true
             }
         ]
