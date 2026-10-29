@@ -30,8 +30,8 @@ class BalconyScene {
 
         this.wallMaterials = {
             white: this.photoMaterial,
-            beige: this.photoMaterialFor('walls-beige', 'assets/balkonika/walls-v2/beige.png', true),
-            lightGray: this.photoMaterialFor('walls-lightgray', 'assets/balkonika/walls-v2/light-gray.png', true)
+            beige: this.photoMaterialFor('walls-beige', 'assets/balkonika/walls-v3/beige.png', true),
+            lightGray: this.photoMaterialFor('walls-lightgray', 'assets/balkonika/walls-v3/light-gray.png', true)
         };
         this.wall = this.layer('wall-finish', this.wallMaterials.white, -0.01, 1);
         this.wall.setEnabled(false);
@@ -39,10 +39,10 @@ class BalconyScene {
 
         this.floorMaterials = {
             lightWood: this.photoMaterial,
-            darkWood: this.photoMaterialFor('floor-dark-wood', 'assets/balkonika/photo-v4/floor-dark-wood.png', true),
-            grayTile: this.photoMaterialFor('floor-gray-tile', 'assets/balkonika/floors-v2/floor-gray-tile.png', true),
-            herringbone: this.photoMaterialFor('floor-herringbone', 'assets/balkonika/floors-v2/floor-herringbone.png', true),
-            warmTile: this.photoMaterialFor('floor-warm-tile', 'assets/balkonika/floors-v2/floor-warm-tile.png', true)
+            darkWood: this.photoMaterialFor('floor-dark-wood', 'assets/balkonika/floors-v3/floor-dark-wood.png', true),
+            grayTile: this.photoMaterialFor('floor-gray-tile', 'assets/balkonika/floors-v3/floor-gray-tile.png', true),
+            herringbone: this.photoMaterialFor('floor-herringbone', 'assets/balkonika/floors-v3/floor-herringbone.png', true),
+            warmTile: this.photoMaterialFor('floor-warm-tile', 'assets/balkonika/floors-v3/floor-warm-tile.png', true)
         };
         this.floor = this.layer('balcony-floor', this.floorMaterials.lightWood, -0.02, 1);
         this.floor.setEnabled(false);
@@ -50,7 +50,7 @@ class BalconyScene {
         // Photographic details remain independent of the two selectable surfaces.
         this.ceilingMaterial = this.photoMaterialFor('ceiling', 'assets/balkonika/photo-v4/ceiling.png', true);
         this.ceiling = this.layer('photo-ceiling', this.ceilingMaterial, -0.03, 2);
-        this.windowsMaterial = this.photoMaterialFor('windows', 'assets/balkonika/photo-v4/windows.png', true);
+        this.windowsMaterial = this.photoMaterialFor('windows', 'assets/balkonika/walls-v3/windows.png', true);
         this.windows = this.layer('photo-windows', this.windowsMaterial, -0.04, 2);
         this.createOutdoorMotion();
     }

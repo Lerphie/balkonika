@@ -71,32 +71,32 @@ const ArcBindings = {
             },
             {
                 "id": "walls-beige",
-                "path": "assets/balkonika/walls-v2/beige.png",
+                "path": "assets/balkonika/walls-v3/beige.png",
                 "required": true
             },
             {
                 "id": "walls-lightgray",
-                "path": "assets/balkonika/walls-v2/light-gray.png",
+                "path": "assets/balkonika/walls-v3/light-gray.png",
                 "required": true
             },
             {
                 "id": "floor-dark-wood",
-                "path": "assets/balkonika/photo-v4/floor-dark-wood.png",
+                "path": "assets/balkonika/floors-v3/floor-dark-wood.png",
                 "required": true
             },
             {
                 "id": "floor-gray-tile",
-                "path": "assets/balkonika/floors-v2/floor-gray-tile.png",
+                "path": "assets/balkonika/floors-v3/floor-gray-tile.png",
                 "required": true
             },
             {
                 "id": "floor-herringbone",
-                "path": "assets/balkonika/floors-v2/floor-herringbone.png",
+                "path": "assets/balkonika/floors-v3/floor-herringbone.png",
                 "required": true
             },
             {
                 "id": "floor-warm-tile",
-                "path": "assets/balkonika/floors-v2/floor-warm-tile.png",
+                "path": "assets/balkonika/floors-v3/floor-warm-tile.png",
                 "required": true
             },
             {
@@ -106,7 +106,7 @@ const ArcBindings = {
             },
             {
                 "id": "windows",
-                "path": "assets/balkonika/photo-v4/windows.png",
+                "path": "assets/balkonika/walls-v3/windows.png",
                 "required": true
             },
             {
