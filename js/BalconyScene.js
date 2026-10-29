@@ -140,6 +140,36 @@ class BalconyScene {
         this.setWall('white');
     }
 
+    // The runtime waits for existing texture objects before the game becomes ready.
+    // Polling also observes Babylon's loadingError; all timers are cleared on abort.
+    /** @param {AbortSignal} signal @returns {Promise<void>} */
+    waitForTextures(signal) {
+        const textures = this.textures;
+        return new Promise((resolve, reject) => {
+            let settled = false, pollTimer = 0, deadlineTimer = 0;
+            const finish = (error) => {
+                if (settled) return;
+                settled = true;
+                window.clearInterval(pollTimer);
+                window.clearTimeout(deadlineTimer);
+                signal.removeEventListener('abort', onAbort);
+                if (error) reject(error); else resolve();
+            };
+            const onAbort = () => finish(new DOMException('Загрузка отменена', 'AbortError'));
+            if (signal.aborted) { onAbort(); return; }
+            signal.addEventListener('abort', onAbort, { once: true });
+            const check = () => {
+                if (signal.aborted) { onAbort(); return; }
+                if (textures.some(texture => texture.loadingError)) {
+                    finish(new Error('Не удалось загрузить материалы балкона. Проверьте соединение и обновите страницу.'));
+                } else if (textures.every(texture => texture.isReady())) finish(null);
+            };
+            pollTimer = window.setInterval(check, 50);
+            deadlineTimer = window.setTimeout(() => finish(new Error('Загрузка материалов заняла слишком много времени. Проверьте соединение и обновите страницу.')), 45000);
+            check();
+        });
+    }
+
     /** @param {string} name @param {string} hex @param {boolean} [unlit] */
     material(name, hex, unlit = false) {
         const material = new BABYLON.StandardMaterial('balcony-' + name, this.scene);

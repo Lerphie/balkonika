@@ -17,6 +17,7 @@ class Game {
     constructor(app) {
         this.app = app;
         this.state = BalkonikaSelection.initial();
+        this.controlIds = [...Object.keys(BalkonikaSelection.walls).map(x => 'wall_' + x), ...Object.keys(BalkonikaSelection.floors).map(x => 'floor_' + x), 'reset'];
         this.scene = new BalconyScene(app);
         // The responsive grid may resize the canvas after the window resize event.
         // Keep the drawing buffer in sync with the actual CSS box.
@@ -43,6 +44,14 @@ class Game {
         const selection = UI.get('selection');
         if (selection) selection.el.setAttribute('aria-live', 'polite');
         this.renderSelection();
+        for (const id of this.controlIds) { const button = UI.get(id); if (button) button.setEnabled(false); }
+    }
+    /** @param {{signal: AbortSignal}} context */
+    async prepare({ signal }) {
+        signal.throwIfAborted();
+        await this.scene.waitForTextures(signal);
+        signal.throwIfAborted();
+        for (const id of this.controlIds) { const button = UI.get(id); if (button) button.setEnabled(true); }
     }
     action(name, value) {
         this.state = BalkonikaSelection.change(this.state, name, value);
@@ -73,7 +82,7 @@ class Game {
     dispose() {
         this.disposed = true;
         if (this.resizeObserver) this.resizeObserver.disconnect();
-        for (const id of [...Object.keys(BalkonikaSelection.walls).map(x => 'wall_' + x), ...Object.keys(BalkonikaSelection.floors).map(x => 'floor_' + x), 'reset']) {
+        for (const id of this.controlIds) {
             const button = UI.get(id); if (button) button.onClick(null);
         }
         this.scene.dispose();
